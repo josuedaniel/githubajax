@@ -10,18 +10,23 @@
 </head>
 <body>
 	<div class="container">
-		<form>
+		<form id="userForm">
 			<div class="form-group">
 				<label>Github Username:</label>
 				<input type="text" id="username" class="form-control"> 
-				
+
 			</div>
 		</form>
 		<div id="profile"></div>
 	</div>
 	<script>
-		function getProfile(){
-			var username = 'josuedaniel';
+		function getProfile(e){
+			e.preventDefault();
+			console.log('Fetching...'); 
+			var username = document.getElementById('username').value;
+			if(!username || username == ''){
+				username = 'josuedaniel'; 
+			}
 
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function(){
@@ -56,7 +61,8 @@
 			xhttp.send();
 		}
 
-		getProfile();
+		document.getElementById('userForm').addEventListener('submit', getProfile, false);
+		
 	</script>
 </body>
 </html>
